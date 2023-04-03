@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: overview-update
+  labels:
+    name: update-label
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: update-label
+  template:
+    metadata:
+      labels:
+        name: update-label
+    spec:
+      containers:
+      - name: history
+        image: 643746770507.dkr.ecr.eu-central-1.amazonaws.com/repo-updatedeleteinsertimages:v7
+        imagePullPolicy: IfNotPresent
+        ports:
+          - name: liveness-port
+            containerPort: 8080
